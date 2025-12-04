@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>PriMatika Welcome</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+* {
+  touch-action: manipulation;
+}
+    body {
+      background: #1e40af;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color:#ffffff;
+      background-image: url("bg-home.jpg");
+    }
+
+    html {
+      height: 100%;
+      width: 100%;
+    }
+
+    .app-wrapper {
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .welcome-container {
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .app-icon {
+      font-size: 80px;
+      margin-bottom: 1%;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      margin: 0 0 40px 0;
+      opacity: 0.9;
+    }
+
+    .form-container {
+      background: #60a5fa;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      background: rgb(255, 255, 255);
+      width: 100%;
+      padding: 16px;
+      font-size: 16px;
+      border: 2px solid #053184;
+      border-radius: 12px;
+      box-sizing: border-box;
+      transition: all 0.2s;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #60a5fa;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      font-size: 20px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .welcome-message {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    .welcome-message.show {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .welcome-message-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+
+    .welcome-message-text {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+    }
+
+    .welcome-message-subtext {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .language-selector {
+      position: fixed;
+      bottom: clamp(12px, 2vw, 20px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: clamp(6px, 1vw, 8px);
+      background: rgba(0, 0, 0, 0.3);
+      padding: clamp(6px, 1vw, 8px);
+      border-radius: clamp(8px, 2vw, 12px);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    .language-btn {
+      padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2.5vw, 16px);
+      font-size: clamp(12px, 2vw, 14px);
+      font-weight: 600;
+      border: 2px solid transparent;
+      border-radius: clamp(6px, 1vw, 8px);
+      cursor: pointer;
+      transition: all 0.2s;
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      min-width: clamp(40px, 8vw, 50px);
+    }
+
+    .language-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .language-btn.active {
+      background: #ffffff;
+      color: #1e40af;
+      border-color: #ffffff;
+    }
+
+    .language-btn:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+  
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+ </head>
+ <body>
+<div class="app-wrapper">
+  <div class="welcome-container" id="welcome-container">
+    <div class="app-icon">
+    <img src="logo_noname.png" width="40%" height="40%" alt="PriMatika Logo">
+    </div>
+    <h1 class="title" id="welcome-title">Welcome to PriMatika!</h1>
+    <p class="subtitle" id="welcome-subtitle">Let's get to know you</p>
+    <form class="form-container" id="welcome-form">
+      <div class="form-group">
+        <label for="name-input" class="form-label" id="name-label">What's your name?</label>
+        <input type="text" id="name-input" class="form-input" required style="text-transform: capitalize;">
+      </div>
+      <div class="form-group">
+        <label for="age-input" class="form-label" id="age-label">How old are you?</label>
+        <input type="number" id="age-input" class="form-input" min="0" max="120" required>
+      </div>
+      <button type="submit" class="submit-btn"> <span id="submit-btn">Get Started!</span> </button>
+      
+    </form>
+      <!-- Language Selector -->
+  <div class="language-selector">
+    <button onclick="changeLanguage('en')" class="language-btn active" data-lang="en">Eng</button> 
+    <button onclick="changeLanguage('fil')" class="language-btn" data-lang="fil">Fil</button> 
+    <button onclick="changeLanguage('hil')" class="language-btn" data-lang="hil">Hil</button>
+  </div>
+  </div>
+
+  <div class="welcome-message" id="welcome-message">
+    <div class="welcome-message-icon">
+      🎉
+    </div>
+    <h2 class="welcome-message-text" id="greeting-text">Welcome!</h2>
+    <p class="welcome-message-subtext" id="greeting-subtext">Let's start learning math!</p>
+    <button type="submit" class="submit-btn" id="submit-btn">
+      <a href="home.html" style="color:black; text-decoration: none;" id="lez-go">Let's Go!</a>
+    </button>
+  </div>
+
+</div>
+
+  <script>
+    const defaultConfig = {
+      background_color: '#1e40af',
+      surface_color: '#60a5fa',
+      text_color: '#ffffff',
+      primary_action_color: '#1e40af',
+      secondary_action_color: '#60a5fa',
+    }
+
+    const translations = {
+      en: {
+        welcome_title: 'Welcome to PriMatika!',
+        welcome_subtitle: "Let's get to know you",
+        welcome_message: "Welcome!",
+        name_label: "What's your name?",
+        age_label: 'How old are you?',
+        submit_btn: "Get Started!",
+        lez_go: "Let's Go!"
+      },
+      fil: {
+        welcome_title: 'Maligayang Pagdating sa PriMatika!',
+        welcome_subtitle: 'Kilalanin muna natin ikaw',
+        welcome_message: 'Maligayang Pagdating!',
+        name_label: 'Ano ang iyong pangalan?',
+        age_label: 'Ilang taon ka na?',
+        submit_btn: "Magsimula na Tayo!",
+        lez_go: "Tara na!"
+      },
+      hil: {
+        welcome_title: 'Welcome sa PriMatika!',
+        welcome_subtitle: 'Kilalahon ta anay ikaw',
+        welcome_message: 'Dayon!',
+        name_label: 'Ano ang imo nga ngalan?',
+        age_label: 'Pila ka tuig ka na?',
+        submit_btn: "Sugod ta!",
+        lez_go: "Ta!"
+      }
+    }
+
+    async function onConfigChange(config) {
+      const appWrapper = document.querySelector('.app-wrapper');
+      const title = document.getElementById('welcome-title');
+      const subtitle = document.getElementById('welcome-subtitle');
+      const nameLabel = document.getElementById('name-label');
+      const ageLabel = document.getElementById('age-label');
+      const formLabels = document.querySelectorAll('.form-label');
+      const greetingText = document.getElementById('greeting-text');
+      const greetingSubtext = document.getElementById('greeting-subtext');
+      const lesgo = document.getElementById('lez-go');
+      const submitbtn = document.getElementById('submit-btn');
+
+      const bgColor = defaultConfig.background_color;
+      const surfaceColor = defaultConfig.surface_color;
+      const textColor = defaultConfig.text_color;
+      const primaryColor = defaultConfig.primary_action_color;
+      const secondaryColor = defaultConfig.secondary_action_color;
+
+      appWrapper.style.background = bgColor;
+      title.style.color = textColor;
+      subtitle.style.color = textColor;
+      
+      formLabels.forEach(label => {
+        label.style.color = secondaryColor;
+      });
+
+      submitbtn.style.background = primaryColor;
+      submitbtn.style.color = bgColor;
+
+      greetingText.style.color = textColor;
+      greetingSubtext.style.color = textColor;
+
+      title.textContent = defaultConfig.welcome_title;
+      subtitle.textContent = defaultConfig.welcome_subtitle;
+      nameLabel.textContent = defaultConfig.name_label;
+      ageLabel.textContent = defaultConfig.age_label;
+      submitbtn.textContent = defaultConfig.submit_btn;
+      lesgo.textContent = defaultConfig.lez_go;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              config.primary_action_color = value;
+              window.elementSdk.setConfig({ primary_action_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+            set: (value) => {
+              config.secondary_action_color = value;
+              window.elementSdk.setConfig({ secondary_action_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['welcome_title', config.welcome_title || defaultConfig.welcome_title],
+        ['welcome_subtitle', config.welcome_subtitle || defaultConfig.welcome_subtitle],
+        ['name_label', config.name_label || defaultConfig.name_label],
+        ['age_label', config.age_label || defaultConfig.age_label],
+        ['button_text', config.button_text || defaultConfig.button_text]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    /* Form submission handler */
+    const form = document.getElementById('welcome-form');
+    const welcomeContainer = document.getElementById('welcome-container');
+    const welcomeMessage = document.getElementById('welcome-message');
+    const greetingText = document.getElementById('greeting-text');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name-input').value;
+      const age = document.getElementById('age-input').value;
+
+      /* Hide form and show welcome message */
+      welcomeContainer.style.display = 'none';
+      welcomeMessage.classList.add('show');
+      greetingText.textContent = `Welcome, ${name}!`;
+    });
+
+/* Function to change the text based on the selected language */
+function changeLanguage(lang) {
+  document.getElementById('welcome-title').textContent = translations[lang].welcome_title;
+  document.getElementById('welcome-subtitle').textContent = translations[lang].welcome_subtitle;
+  document.getElementById('name-label').textContent = translations[lang].name_label;
+  document.getElementById('age-label').textContent = translations[lang].age_label;
+  document.getElementById('greeting-text').textContent = translations[lang].welcome_message;
+  document.getElementById('greeting-subtext').textContent = translations[lang].welcome_subtext;
+  document.querySelector('lez-go').textContent = translations[lang].les_go;
+
+  updateTexts(lang);
+  localStorage.setItem("lang", lang);
+}
+
+function updateTexts(lang) {
+    document.getElementById("btn").innerText = translations[lang].button;
+}
+
+/* Event listeners for language selection buttons */
+document.querySelectorAll('.language-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    // Remove active class from all buttons and add it to the clicked button
+    document.querySelectorAll('.language-btn').forEach(btn => btn.classList.remove('active'));
+    this.classList.add('active'); 
+    changeLanguage(selectedLang);
+  });
+});
+
+    (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a73f7ad77e5a9ab',t:'MTc2NDYwNjYwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+</script>
+  <script src="script.js"></script>
+</body>
+</html>
